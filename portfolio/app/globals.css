@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: var(--font-quicksand), system-ui, sans-serif;
+}
+
+@theme {
+  --color-bg: #FFF8FB;
+  --color-name: #EA8EB0;
+  --color-subheader: #FFCEE0;
+  --color-vs-top: #FFF5F9;
+  --color-vs-folder: #F4B8D2;
+  --color-vs-sidebar: #FEE2EE;
+  --color-vs-tab: white;
+  --color-vs-mainview: white;
+  --color-vs-text-dark: #A32050;
+  --color-vs-text-light: #EA8EB0;
+  --color-vs-bottom: #38101F;
+  --color-vs-outline: #A32050;
+}
+
+/* Hide native scrollbar in the tabs scroller (we draw our own overlay thumb) */
+.tabs-native-hide {
+  scrollbar-width: none; /* Firefox */
+}
+.tabs-native-hide::-webkit-scrollbar {
+  height: 0px; /* Chrome/Safari/Edge */
+}
