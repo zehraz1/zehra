@@ -1,6 +1,5 @@
 import "./globals.css";
 import { Quicksand } from "next/font/google";
-import Container  from "./vsContainer/vs"; 
 
 const quicksand = Quicksand({
   subsets: ["latin"],
@@ -14,11 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${quicksand.variable} bg-bg`}>
-      <body>
-        {children}
-        <Container />
-      </body>
+    <html lang="en" className={quicksand.variable}>
+      <body className="bg-[#ffffff] text-[#D4D4D4] font-sans">{children}</body>
     </html>
   );
 }
