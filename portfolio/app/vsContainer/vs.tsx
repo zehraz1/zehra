@@ -42,53 +42,476 @@ function wrapToWidth(text, maxChars) {
   return out;
 }
 
+function Badge({ children }) {
+  return (
+    <span className="inline-flex items-center rounded-md border border-[#3C3C3C] bg-[#2A2A2A] px-2 py-0.5 text-[11px] text-[#D4D4D4]">
+      {children}
+    </span>
+  );
+}
+
+function ExtensionsExperienceView({ items }) {
+  return (
+    <div className="p-3 sm:p-6">
+      <div className="mb-3 sm:mb-6">
+        <div className="text-[#D4D4D4] text-[16px] sm:text-[18px] font-semibold">
+          Experience
+        </div>
+      </div>
+
+      {/* SCROLLER */}
+      <div
+        className="max-h-[calc(100vh-220px)] sm:max-h-[calc(100vh-260px)] overflow-y-auto pr-1"
+        style={{ scrollbarGutter: "stable" }}
+      >
+        <div className="space-y-3 sm:space-y-4">
+          {items.map((role) => (
+            <div
+              key={role.id}
+              className="rounded-xl border border-[#2D2D2D] bg-[#252526] hover:bg-[#2A2A2A] transition-colors"
+            >
+              <div className="p-3 sm:p-5 flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <div className="flex items-start gap-3 min-w-0">
+                  <div className="shrink-0">
+                    <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-lg bg-[#1E1E1E] border border-[#3C3C3C] flex items-center justify-center text-[#4FC1FF] font-bold text-[13px] sm:text-[14px]">
+                      {role.logoText ?? "GD"}
+                    </div>
+                  </div>
+
+                  <div className="min-w-0 flex-1">
+                    <div className="text-[#FFFFFF] text-[13px] sm:text-[15px] font-semibold leading-snug break-words whitespace-normal">
+                      {role.title}
+                    </div>
+
+                    <div className="text-[#CCCCCC] text-[11.5px] sm:text-[13px] mt-0.5 leading-snug break-words whitespace-normal">
+                      {role.company}{" "}
+                      <span className="text-[#858585]">• {role.dates}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex sm:justify-end">
+                  <button
+                    type="button"
+                    className="h-8 px-3 rounded-md bg-[#007ACC] hover:bg-[#0A84D6] text-white text-[12px] font-semibold w-full sm:w-auto"
+                    title="Visual only"
+                  >
+                    Internship
+                  </button>
+                </div>
+
+                <div className="mt-1 sm:mt-0 sm:ml-auto sm:w-full">
+                  <div className="flex flex-wrap gap-2">
+                    {role.tools.map((t) => (
+                      <Badge key={t}>{t}</Badge>
+                    ))}
+                  </div>
+
+                  <div className="mt-3 text-[#D4D4D4] text-[12px] sm:text-[13px] leading-relaxed break-words whitespace-normal">
+                    {role.summary}
+                  </div>
+
+                  <div className="mt-4 flex flex-wrap items-center gap-2 sm:gap-3 text-[11px] text-[#858585] break-words">
+                    <span className="inline-flex items-center gap-1">
+                      <span className="text-[#D4D4D4]">★</span> 5.0
+                    </span>
+                    <span className="hidden sm:inline">•</span>
+                    <span>{role.location}</span>
+                    <span className="hidden sm:inline">•</span>
+                    <span className="text-[#CCCCCC]">{role.team}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* Projects cards look clean on md/lg, still great on mobile */
+function ExtensionsProjectsView({ items }) {
+  return (
+    <div className="p-3 sm:p-6">
+      <div className="mb-3 sm:mb-6">
+        <div className="text-[#D4D4D4] text-[16px] sm:text-[18px] font-semibold">
+          Projects
+        </div>
+      </div>
+
+      {/* SCROLLER */}
+      <div
+        className="max-h-[calc(100vh-220px)] sm:max-h-[calc(100vh-260px)] overflow-y-auto pr-1"
+        style={{ scrollbarGutter: "stable" }}
+      >
+        <div className="space-y-3 sm:space-y-4">
+          {items.map((p) => (
+            <div
+              key={p.id}
+              className="rounded-xl border border-[#2D2D2D] bg-[#252526] hover:bg-[#2A2A2A] transition-colors"
+            >
+              <div className="p-3 sm:p-5">
+                <div className="flex flex-col md:flex-row md:items-start md:gap-5 gap-3">
+                  <div className="shrink-0">
+                    <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-lg bg-[#1E1E1E] border border-[#3C3C3C] flex items-center justify-center text-[#4FC1FF] font-bold text-[13px] sm:text-[14px]">
+                      {p.logoText ?? "PR"}
+                    </div>
+                  </div>
+
+                  <div className="min-w-0 flex-1">
+                    <div className="text-[#FFFFFF] text-[13px] sm:text-[15px] font-semibold leading-snug break-words whitespace-normal">
+                      {p.title}
+                    </div>
+
+                    <div className="mt-2 text-[#D4D4D4] text-[12px] sm:text-[13px] leading-relaxed break-words whitespace-normal">
+                      {p.description}
+                    </div>
+
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {p.languages.map((lang) => (
+                        <Badge key={lang}>{lang}</Badge>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="md:w-[220px] w-full flex flex-col gap-2 md:items-end">
+                    <button
+                      type="button"
+                      className="h-8 px-3 rounded-md bg-[#007ACC] hover:bg-[#0A84D6] text-white text-[12px] font-semibold w-full md:w-auto"
+                      title="Visual only"
+                    >
+                      Project
+                    </button>
+
+                    {p.githubUrl ? (
+                      <a
+                        href={p.githubUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="w-full md:w-auto inline-flex items-center justify-center gap-2 h-8 px-3 rounded-md border border-[#3C3C3C] bg-[#1E1E1E] hover:bg-[#232323] text-[12px] text-[#D4D4D4]"
+                        title="Open GitHub"
+                      >
+                        <span className="text-[#CCCCCC]">GitHub</span>
+                        <span className="text-[#858585]">↗</span>
+                      </a>
+                    ) : (
+                      <div className="text-[#858585] text-[12px] w-full md:w-auto text-center md:text-right">
+                        GitHub: Coming soon
+                      </div>
+                    )}
+
+                    {p.githubLabel ? (
+                      <div className="hidden md:block text-[11px] text-[#858585] text-right break-words">
+                        {p.githubLabel}
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SkillPill({ name, iconUrl, fallback }) {
+  const [imgOk, setImgOk] = useState(true);
+
+  return (
+    <div className="flex items-center gap-2 rounded-md border border-[#2D2D2D] bg-[#1E1E1E] hover:bg-[#2A2A2A] transition-colors px-2.5 py-2 min-w-0">
+      <div className="h-6 w-6 rounded bg-[#252526] border border-[#3C3C3C] flex items-center justify-center shrink-0 overflow-hidden">
+        {iconUrl && imgOk ? (
+          <img
+            src={iconUrl}
+            alt={`${name} logo`}
+            className="h-4 w-4"
+            onError={() => setImgOk(false)}
+          />
+        ) : (
+          <span className="text-[10px] text-[#4FC1FF] font-bold">
+            {fallback ?? name.slice(0, 2).toUpperCase()}
+          </span>
+        )}
+      </div>
+
+      <div className="text-[12px] sm:text-[13px] text-[#D4D4D4] truncate">
+        {name}
+      </div>
+    </div>
+  );
+}
+
+function SkillsSection({ title, items }) {
+  return (
+    <div className="rounded-xl border border-[#2D2D2D] bg-[#252526]">
+      <div className="p-3 sm:p-5 border-b border-[#2D2D2D]">
+        <div className="text-[#FFFFFF] text-[13px] sm:text-[15px] font-semibold">
+          {/* On very small screens, allow full wrap */}
+          <span className="block sm:inline break-words whitespace-normal">
+            {title}
+          </span>
+        </div>
+        <div className="text-[#858585] text-[11.5px] sm:text-[12px] mt-1">
+          {items.length} items
+        </div>
+      </div>
+
+      <div className="p-3 sm:p-5">
+        {/* Small screens: 1 per line. sm+: grid */}
+        <div className="flex flex-col gap-2 sm:grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 sm:gap-3">
+          {items.map((s) => (
+            <SkillPill
+              key={s.name}
+              name={s.name}
+              iconUrl={s.iconUrl}
+              fallback={s.fallback}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ExtensionsSkillsView({ languages, tools }) {
+  return (
+    <div className="p-3 sm:p-6">
+      <div className="mb-3 sm:mb-6">
+        <div className="text-[#D4D4D4] text-[16px] sm:text-[18px] font-semibold">
+          Skills
+        </div>
+      </div>
+
+      {/* SCROLLER */}
+      <div
+        className="max-h-[calc(100vh-220px)] sm:max-h-[calc(100vh-260px)] overflow-y-auto pr-1"
+        style={{ scrollbarGutter: "stable" }}
+      >
+        <div className="space-y-3 sm:space-y-4">
+          <SkillsSection title="Languages" items={languages} />
+          <SkillsSection title="Developer Tools & Technologies" items={tools} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Container({ fullPage = false, onBack } = {}) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  // JSON for About Me (then we stringify it so it displays like a code file)
-  const aboutMeJson = useMemo(
-    () => ({
-      name: "Zehra",
-      title: "Software Engineering Student",
-      bio:
-        "I’m Zehra — a Software Engineering student who loves developing and designing clean, modern experiences.",
-      interests: ["Web development", "UI/UX design", "Hardware", "Coding"],
-      hobbies: ["Pinterest scrolling", "Going to the gym", "Red Bull enjoyer"],
-      goals: ["Travel the world", "Experience new cultures", "Build cool projects"],
-      personality: {
-        lovesChange: true,
-        getsBoredEasily: true,
-        note: "I like switching things up — it keeps me learning and building new stuff.",
-      },
-    }),
-    []
-  );
-  const files = useMemo(
+
+  const experienceRoles = useMemo(
     () => [
       {
-        id: "aboutme.md",
-        label: "aboutme.md",
-        content: JSON.stringify(aboutMeJson, null, 2),
+        id: "gdms",
+        company: "General Dynamics Mission Systems–Canada",
+        title: "Software Developer and Test Intern",
+        dates: "January 2025 – Present",
+        logoText: "GD",
+        location: "Calgary, AB",
+        team: "ASIS Team",
+        tools: [
+          "Python",
+          ".NET Framework",
+          "C#",
+          "XAML",
+          "Squish",
+          "MVVM",
+          "SAFe",
+        ],
+        summary:
+          "Developed and implemented mission-critical .NET Framework features in C#, enhancing LAV 6 radio communication and simplifying crew operations in high-stress environments.",
+      },
+    ],
+    []
+  );
+
+  const skillLanguages = useMemo(
+    () => [
+      {
+        name: "Python",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
       },
       {
-        id: "experience",
-        label: "experience",
-        content: "Experience content...\nMore experience...\nAnother line...",
+        name: "C++",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg",
       },
       {
-        id: "projects",
-        label: "projects",
-        content: "Projects content...\nProject 1\nProject 2",
+        name: "C",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg",
       },
       {
-        id: "skills.md",
-        label: "skills.md",
-        content: "Skills content...\nJavaScript\nReact\nTailwind",
+        name: "C#",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg",
       },
       {
-        id: "contactme.md",
-        label: "contactme.md",
-        content: "Contact content...\nemail: ...\nlinkedin: ...",
+        name: "Java",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
       },
+      {
+        name: "TypeScript",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+      },
+      {
+        name: "JavaScript",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+      },
+      {
+        name: "SQL",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
+        fallback: "SQL",
+      },
+      { name: "Assembly", iconUrl: null, fallback: "ASM" },
+      {
+        name: "HTML",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+      },
+      {
+        name: "CSS",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+      },
+      { name: "JSON", iconUrl: null, fallback: "{}" },
+    ],
+    []
+  );
+
+  const skillTools = useMemo(
+    () => [
+      {
+        name: ".NET",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg",
+        fallback: ".N",
+      },
+      { name: "WPF", iconUrl: null, fallback: "WP" },
+      {
+        name: "React",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+      },
+      {
+        name: "Node.js",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+      },
+      {
+        name: "Next.js",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+        fallback: "NX",
+      },
+      {
+        name: "Flask",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg",
+        fallback: "FL",
+      },
+      {
+        name: "Tailwind CSS",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+      },
+      { name: "Framer Motion", iconUrl: null, fallback: "FM" },
+      {
+        name: "PostgreSQL",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+      },
+      {
+        name: "Firebase",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg",
+      },
+      {
+        name: "Git",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+      },
+      {
+        name: "GitHub",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+        fallback: "GH",
+      },
+      {
+        name: "Linux",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg",
+      },
+      { name: "JUnit", iconUrl: null, fallback: "JU" },
+      { name: "Squish", iconUrl: null, fallback: "SQ" },
+      { name: "Wireshark", iconUrl: null, fallback: "WS" },
+      {
+        name: "Visual Studio",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg",
+        fallback: "VS",
+      },
+      {
+        name: "IntelliJ IDEA",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg",
+        fallback: "IJ",
+      },
+      {
+        name: "Eclipse",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/eclipse/eclipse-original.svg",
+      },
+      {
+        name: "Figma",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+      },
+      {
+        name: "Confluence",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/confluence/confluence-original.svg",
+        fallback: "CF",
+      },
+      {
+        name: "Jira",
+        iconUrl:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg",
+      },
+    ],
+    []
+  );
+
+  const projects = useMemo(
+    () => [
+      {
+        id: "cpp-airline",
+        title: "C++ Airline Registration System",
+        logoText: "C++",
+        githubUrl:
+          "https://github.com/zehraz1/projects/tree/main/Airline%20C%2B%2B",
+        githubLabel: "projects / Airline C++",
+        description:
+          "Developed an airline registration system using C++ that efficiently handles passenger bookings, flight management, and ticketing processes.",
+        languages: ["C++"],
+      },
+    ],
+    []
+  );
+
+  const files = useMemo(
+    () => [
+      { id: "experience", label: "experience", content: "" },
+      { id: "projects", label: "projects", content: "" },
+      { id: "skills", label: "skills", content: "" },
     ],
     []
   );
@@ -155,6 +578,10 @@ export default function Container({ fullPage = false, onBack } = {}) {
 
   const tabsRef = useRef(null);
   const iconFor = (name) => (name.endsWith(".md") ? "📝" : "📄");
+
+  const isExperienceTab = activeFileId === "experience";
+  const isProjectsTab = activeFileId === "projects";
+  const isSkillsTab = activeFileId === "skills";
 
   return (
     <div
@@ -243,7 +670,7 @@ export default function Container({ fullPage = false, onBack } = {}) {
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="m21 21-4.3-4.3m1.8-5.2a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"
+                    d="m21 21-4.3-4.3m1.8-5.2a7 7.0 0 1 1-14 0 7 7 0 0 1 14 0Z"
                   />
                 </svg>
               </button>
@@ -264,7 +691,7 @@ export default function Container({ fullPage = false, onBack } = {}) {
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="M6 3.75A2.25 2.25 0 1 0 6 8.25a2.25 2.25 0 0 0 0-4.5ZM6 15.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM18 9.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z"
+                    d="M6 3.75A2.25 2.25 0 1 0 6 8.25a2.25 2.25 0 0 0 0-4.5ZM6 15.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM18 9.75a2.25 2.25 0 1 0 0 4.5Z"
                   />
                   <path
                     strokeLinecap="round"
@@ -311,7 +738,7 @@ export default function Container({ fullPage = false, onBack } = {}) {
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="M7.5 3.75h3v3h-3v-3Zm6 0h3v3h-3v-3ZM7.5 10.5h3v3h-3v-3Zm6 0h3v3h-3v-3ZM7.5 17.25h3v3h-3v-3Zm6 0h3v3h-3v-3Z"
+                    d="M7.5 3.75h3v3h-3v-3Zm6 0h3v3h-3v-3ZM7.5 10.5h3v3h-3v-3Zm6 0h3v3h-3v-3ZM7.5 17.25h3v3h-3v-3Zm6 0h3v-3Z"
                   />
                 </svg>
               </button>
@@ -323,7 +750,6 @@ export default function Container({ fullPage = false, onBack } = {}) {
             <div className="h-12 box-border px-2 sm:px-4 flex items-center justify-between border-b border-[#3C3C3C]">
               {sidebarOpen ? (
                 <>
-                  {/* Optical alignment tweak */}
                   <span className="uppercase tracking-[0.18em] text-[11px] font-semibold text-[#CCCCCC] truncate leading-none translate-y-[1px]">
                     Explorer
                   </span>
@@ -422,7 +848,9 @@ export default function Container({ fullPage = false, onBack } = {}) {
                           if (!isLastTab) closeTab(tabId);
                         }}
                         className={`ml-1 text-[#858585] hover:text-[#D4D4D4] px-1 rounded ${
-                          isLastTab ? "pointer-events-none opacity-30" : "hover:bg-[#3A3A3A]"
+                          isLastTab
+                            ? "pointer-events-none opacity-30"
+                            : "hover:bg-[#3A3A3A]"
                         }`}
                         title={isLastTab ? "Can't close last tab" : "Close"}
                       >
@@ -434,24 +862,35 @@ export default function Container({ fullPage = false, onBack } = {}) {
               </div>
             </div>
 
-
+            {/* Content */}
             <div className="flex-1 overflow-y-auto">
-              <div className="grid grid-cols-[34px_1fr] sm:grid-cols-[48px_1fr]">
-                <div className="py-4 sm:py-6 pr-2 sm:pr-3 text-right text-[#858585] select-none border-r border-[#2D2D2D]">
-                  {displayLines.map((_, i) => (
-                    <div key={i}>{i + 1}</div>
-                  ))}
-                </div>
+              {isExperienceTab ? (
+                <ExtensionsExperienceView items={experienceRoles} />
+              ) : isProjectsTab ? (
+                <ExtensionsProjectsView items={projects} />
+              ) : isSkillsTab ? (
+                <ExtensionsSkillsView
+                  languages={skillLanguages}
+                  tools={skillTools}
+                />
+              ) : (
+                <div className="grid grid-cols-[34px_1fr] sm:grid-cols-[48px_1fr]">
+                  <div className="py-4 sm:py-6 pr-2 sm:pr-3 text-right text-[#858585] select-none border-r border-[#2D2D2D]">
+                    {displayLines.map((_, i) => (
+                      <div key={i}>{i + 1}</div>
+                    ))}
+                  </div>
 
-                <div
-                  ref={textColRef}
-                  className="p-4 sm:p-6 text-[#D4D4D4] font-mono min-w-0"
-                >
-                  {displayLines.map((line, i) => (
-                    <div key={i}>{line === "" ? "\u00A0" : line}</div>
-                  ))}
+                  <div
+                    ref={textColRef}
+                    className="p-4 sm:p-6 text-[#D4D4D4] font-mono min-w-0"
+                  >
+                    {displayLines.map((line, i) => (
+                      <div key={i}>{line === "" ? "\u00A0" : line}</div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
 
             <div className="h-8 bg-[#007ACC] text-white text-[12px] flex items-center justify-between px-3">
@@ -477,10 +916,10 @@ export default function Container({ fullPage = false, onBack } = {}) {
             top: 8px !important;
           }
           .tabsScroll {
-            scrollbar-width: none; /* Firefox */
+            scrollbar-width: none;
           }
           .tabsScroll::-webkit-scrollbar {
-            height: 0px; /* Chrome/Safari */
+            height: 0px;
           }
         `}</style>
       </div>
