@@ -38,7 +38,7 @@ export default function Home() {
       publisher: "zehra",
       version: "1.0.0",
       installs: formatFull(installsCount),
-      rating: "4.9",
+      rating: "5.0",
       downloads: formatCompact(downloadsCount),
       category: "Portfolio / Personal",
     }),
@@ -92,8 +92,6 @@ export default function Home() {
     },
   };
 
-
-
   // Sends via user's email client (mailto) — no backend needed
   const onSubmitContact = (e: React.FormEvent) => {
     e.preventDefault();
@@ -137,20 +135,20 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.25 }}
-            className="w-full h-full overflow-hidden bg-[#18191a]"
+            className="w-full h-full overflow-hidden bg-[#FFF6FA]" /* was #18191a */
           >
             <div className="w-full h-full p-2 sm:p-6 lg:p-8">
               <div className="w-full h-full sm:rounded-3xl shadow-[80px_80px_80px_rgba(0,0,0,0)] sm:p-4">
-                <div className="w-full h-full rounded-2xl overflow-hidden bg-[#1E1E1E] shadow-[0_20px_60px_rgba(0,0,0,.55)] flex flex-col">
+                <div className="w-full h-full rounded-2xl overflow-hidden bg-[#FFFFFF] shadow-[0_20px_60px_rgba(17,24,39,.18)] flex flex-col">
                   {/* Header */}
-                  <div className="h-10 bg-[#252526] border-b border-[#2B2B2B] flex items-center justify-between px-3 shrink-0">
+                  <div className="h-10 bg-[#FFE4F0] border-b border-[#F3B6D3] flex items-center justify-between px-3 shrink-0">
                     <div className="flex items-center gap-2">
-                      <span className="h-3 w-3 rounded-full bg-[#FF5F56]" />
-                      <span className="h-3 w-3 rounded-full bg-[#FFBD2E]" />
-                      <span className="h-3 w-3 rounded-full bg-[#27C93F]" />
+                      <span className="h-3 w-3 rounded-full bg-[#FF5FA2]" />
+                      <span className="h-3 w-3 rounded-full bg-[#FFC062]" />
+                      <span className="h-3 w-3 rounded-full bg-[#41D3A2]" />
                     </div>
-                    <div className="text-[12px] text-[#CCCCCC] tracking-wide items-center flex justify-center">
-                      Zehra's Portfolio
+                    <div className="text-[12px] text-[#6B2B4A] tracking-wide items-center flex justify-center">
+                      Zehra&apos;s Portfolio
                     </div>
                     <div className="w-16" />
                   </div>
@@ -161,8 +159,8 @@ export default function Home() {
                       {/* LEFT */}
                       <div className="min-h-0 flex flex-col gap-3 sm:gap-6">
                         {/* Title */}
-                        <div className="flex items-start gap-3 sm:gap-4">
-                          <div className="shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-[#2D2D2D] border border-[#2B2B2B] flex items-center justify-center">
+                        <div className="flex items-start gap-3 sm:gap-4 mt-1 mb-1">
+                          <div className="shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-[#FFF0F7] border border-[#F3B6D3] flex items-center justify-center">
                             <span className="text-5xl sm:text-3xl">👩‍💻</span>
                           </div>
 
@@ -171,7 +169,7 @@ export default function Home() {
                               variants={container}
                               initial="hidden"
                               animate="show"
-                              className="font-semibold text-xl sm:text-3xl text-[#D4D4D4] leading-tight"
+                              className="font-semibold text-xl sm:text-3xl text-[#3A0F24] leading-tight"
                               aria-label={meta.name}
                             >
                               {meta.name.split("").map((c, i) => (
@@ -181,8 +179,8 @@ export default function Home() {
                               ))}
                             </motion.h1>
 
-                            <div className="mt-1 text-[12px] sm:text-sm text-[#858585]">
-                              <span className="text-[#CCCCCC]">{meta.publisher}</span>
+                            <div className="mt-1 text-[12px] sm:text-sm text-[#8A4A69]">
+                              <span className="text-[#6B2B4A]">{meta.publisher}</span>
                               <span className="mx-2">•</span>
                               <span>v{meta.version}</span>
                               <span className="mx-2">•</span>
@@ -191,13 +189,13 @@ export default function Home() {
 
                             {/* BADGES + QUICK DOWNLOAD */}
                             <div className="mt-3 flex flex-wrap items-center gap-2">
-                              <span className="text-[12px] px-2 py-1 rounded-md bg-[#2D2D2D] border border-[#2B2B2B] text-[#CCCCCC]">
+                              <span className="text-[12px] px-2 py-1 rounded-md bg-[#FFF0F7] border border-[#F3B6D3] text-[#6B2B4A]">
                                 ★ {meta.rating}
                               </span>
-                              <span className="text-[12px] px-2 py-1 rounded-md bg-[#2D2D2D] border border-[#2B2B2B] text-[#CCCCCC]">
+                              <span className="text-[12px] px-2 py-1 rounded-md bg-[#FFF0F7] border border-[#F3B6D3] text-[#6B2B4A]">
                                 {meta.downloads} downloads
                               </span>
-                              <span className="text-[12px] px-2 py-1 rounded-md bg-[#2D2D2D] border border-[#2B2B2B] text-[#CCCCCC]">
+                              <span className="text-[12px] px-2 py-1 rounded-md bg-[#FFF0F7] border border-[#F3B6D3] text-[#6B2B4A]">
                                 {meta.installs} installs
                               </span>
 
@@ -205,7 +203,7 @@ export default function Home() {
                               <button
                                 type="button"
                                 onClick={onDownload}
-                                className="text-[12px] px-3 py-1 rounded-md bg-[#007ACC] hover:bg-[#0987d1] text-white font-semibold border border-[#007ACC]"
+                                className="text-[12px] px-3 py-1 rounded-md bg-[#FF4FA3] hover:bg-[#FF3797] text-white font-semibold border border-[#FF4FA3]"
                               >
                                 Download
                               </button>
@@ -213,50 +211,50 @@ export default function Home() {
                           </div>
                         </div>
 
-                      {/* DESCRIPTION */}
-                      <div className="rounded-xl border border-[#2B2B2B] bg-[#161616] p-4 sm:p-6 lg:p-7 xl:p-5 flex flex-col xl:flex-1 xl:min-h-0">
-                        <div className="text-[12px] lg:text-[13px] text-[#858585] mb-2">
-                          About Me
+                        {/* DESCRIPTION */}
+                        <div className="rounded-xl border border-[#F3B6D3] bg-[#FFF7FB] p-4 sm:p-6 lg:p-7 xl:p-5 flex flex-col xl:flex-1 xl:min-h-0">
+                          <div className="text-[12px] lg:text-[13px] text-[#8A4A69] mb-2">
+                            About Me
+                          </div>
+
+                          <p className="text-sm sm:text-base lg:text-base xl:text-base leading-relaxed text-[#4A1630] font-medium">
+                            <span className="text-[#FF4FA3] font-semibold">
+                              Hi, I am Zehra — a software engineer and developer.
+                            </span>
+                            <br />
+                            <br />
+                            I’m interested in full-stack development, systems engineering, hardware, and AI, and I enjoy building technology that solves real problems.
+                            I’m active in student leadership and enjoy connecting with others who are curious and driven.
+                            <br />
+                            <br></br>
+                            <span className="text-[13px] text-[#8A4A69] font-normal">
+                              Click “Download” to learn more about me! ✨
+                            </span>
+                          </p>
                         </div>
 
-                        <p className="text-sm sm:text-base lg:text-base xl:text-base leading-relaxed text-[#CFCFCF] font-medium">
-                          <span className="text-[#4FC1FF] font-semibold">
-                            Hi, I am Zehra — a software engineer and developer.
-                          </span>
-                          <br />
-                          <br />
-                          I’m interested in full-stack development, systems engineering, hardware, and AI, and I enjoy building technology that solves real problems.
-                          I’m active in student leadership and enjoy connecting with others who are curious and driven.
-                          <br />
-                          <br></br>
-                           <span className="text-[13px] text-[#858585] font-normal">
-                            Click “Download” to learn more about me! ✨
-                          </span>
-                        </p>
-                      </div>
-
                         {/* FEATURES (✅ updated to interests + emojis) */}
-                        <div className="rounded-xl border border-[#2B2B2B] bg-[#1B1B1B] p-4 sm:p-6 lg:p-7 xl:p-5 flex flex-col xl:flex-1 xl:min-h-0">
-                          <div className="text-[12px] lg:text-[13px] text-[#858585] mb-1">
+                        <div className="rounded-xl border border-[#F3B6D3] bg-[#FFF7FB] p-4 sm:p-6 lg:p-7 xl:p-5 flex flex-col xl:flex-1 xl:min-h-0">
+                          <div className="text-[12px] lg:text-[13px] text-[#8A4A69] mb-1">
                             Hobbies & Interests
                           </div>
 
-                          <ul className="space-y-2 lg:space-y-3 xl:space-y-2 text-sm sm:text-base lg:text-base xl:text-base text-[#CCCCCC]">
+                          <ul className="space-y-2 lg:space-y-3 xl:space-y-2 text-sm sm:text-base lg:text-base xl:text-base text-[#4A1630]">
                             <li className="flex gap-2">
-                              <span className="text-[#4FC1FF]">•</span>
+                              <span className="text-[#FF4FA3]">•</span>
                               🏋️‍♀️ Gym girl — love training & staying active
                             </li>
                             <li className="flex gap-2">
-                              <span className="text-[#4FC1FF]">•</span>
+                              <span className="text-[#FF4FA3]">•</span>
                               🪽 Red Bull enthusiast (yes, the wings are real)
                             </li>
-                          <li className="flex gap-2">
-                            <span className="text-[#4FC1FF]">•</span>
-                            📌 Pinterest addict (inspo scrolling)
-                          </li>
                             <li className="flex gap-2">
-                              <span className="text-[#4FC1FF]">•</span>
-                               🌸 Perfume obsessed — I love a good signature scent
+                              <span className="text-[#FF4FA3]">•</span>
+                              📌 Pinterest addict (inspo scrolling)
+                            </li>
+                            <li className="flex gap-2">
+                              <span className="text-[#FF4FA3]">•</span>
+                              🌸 Perfume obsessed — I love a good signature scent
                             </li>
                           </ul>
 
@@ -266,20 +264,20 @@ export default function Home() {
                               href="https://github.com/zehraz1"
                               target="_blank"
                               rel="noreferrer"
-                              className="h-11 rounded-md bg-[#2D2D2D] border border-[#2B2B2B] hover:bg-[#323232] text-[#D4D4D4] text-[13px] font-semibold flex items-center justify-between px-3"
+                              className="h-11 rounded-md bg-[#FFF0F7] border border-[#F3B6D3] hover:bg-[#FFE4F0] text-[#3A0F24] text-[13px] font-semibold flex items-center justify-between px-3"
                             >
                               <span className="flex items-center gap-2">
-                                <GitHubIcon className="h-5 w-5 text-[#D4D4D4]" />
+                                <GitHubIcon className="h-5 w-5 text-[#3A0F24]" />
                                 GitHub
                               </span>
-                              <span className="text-[#858585]">↗</span>
+                              <span className="text-[#8A4A69]">↗</span>
                             </a>
 
                             <a
                               href="https://www.linkedin.com/in/zehrazaidi110/"
                               target="_blank"
                               rel="noreferrer"
-                              className="h-11 rounded-md bg-[#0A66C2] hover:bg-[#0b72d6] text-white text-[13px] font-semibold flex items-center justify-between px-3"
+                              className="h-11 rounded-md bg-[#FF4FA3] hover:bg-[#FF3797] text-white text-[13px] font-semibold flex items-center justify-between px-3"
                             >
                               <span className="flex items-center gap-2">
                                 <LinkedInIcon className="h-5 w-5 text-white" />
@@ -289,83 +287,20 @@ export default function Home() {
                             </a>
                           </div>
                         </div>
-
-                        {/* Mobile-only: Download CTA */}
-                        <div className="xl:hidden">
-                          <button
-                            type="button"
-                            onClick={onDownload}
-                            className="w-full h-12 rounded-xl bg-[#007ACC] hover:bg-[#0987d1] text-white font-semibold text-base flex items-center justify-center gap-3"
-                          >
-                            Download
-                            <motion.span
-                              aria-hidden="true"
-                              animate={{ x: [0, 8, 0] }}
-                              transition={{ duration: 1.1, repeat: Infinity }}
-                              className="text-white text-xl"
-                            >
-                              ➜
-                            </motion.span>
-                          </button>
-                          <div className="mt-2 text-[12px] text-[#858585] text-center">
-                            Opens the VS Code portfolio view
-                          </div>
-                        </div>
                       </div>
 
                       {/* RIGHT */}
                       <aside className="min-h-0 flex flex-col gap-3 sm:gap-6">
-                        {/* DOWNLOAD box */}
-                        <div className="hidden xl:flex flex-1 min-h-0 rounded-xl border border-[#2B2B2B] bg-[#252526] overflow-hidden relative flex-col">
-                          <button
-                            type="button"
-                            onClick={onDownload}
-                            className="w-full h-14 bg-[#007ACC] hover:bg-[#0987d1] text-white font-semibold text-base"
-                          >
-                            Download
-                          </button>
-
-                          <div className="p-5 sm:p-6 space-y-4 text-[13px] sm:text-[14px] lg:text-[15px] text-[#CCCCCC] flex-1">
-                            <div className="grid grid-cols-2 gap-3">
-                              <div className="rounded-lg bg-[#1E1E1E] border border-[#2B2B2B] p-3">
-                                <div className="text-[#858585] text-[12px]">Version</div>
-                                <div className="mt-1 font-semibold">v{meta.version}</div>
-                              </div>
-
-                              <div className="rounded-lg bg-[#1E1E1E] border border-[#2B2B2B] p-3">
-                                <div className="text-[#858585] text-[12px]">Category</div>
-                                <div className="mt-1 font-semibold">{meta.category}</div>
-                              </div>
-
-                              <div className="rounded-lg bg-[#1E1E1E] border border-[#2B2B2B] p-3">
-                                <div className="text-[#858585] text-[12px]">Rating</div>
-                                <div className="mt-1 font-semibold">★ {meta.rating}</div>
-                              </div>
-
-                              <div className="rounded-lg bg-[#1E1E1E] border border-[#2B2B2B] p-3">
-                                <div className="text-[#858585] text-[12px]">Installs</div>
-                                <div className="mt-1 font-semibold">{meta.installs}</div>
-                              </div>
-                            </div>
-
-                            <div className="pt-2 border-t border-[#2B2B2B]" />
-                          </div>
-
-                          <div className="px-5 sm:px-6 pb-5 text-[12px] text-[#858585]">
-                            (Safe — it just opens my VS Code portfolio view)
-                          </div>
-                        </div>
-
                         {/* CONTACT ME form */}
-                        <div className="rounded-xl border border-[#2B2B2B] bg-[#1B1B1B] p-4 sm:p-6 xl:p-5 flex flex-col xl:flex-1 xl:min-h-0">
-                          <div className="text-[12px] text-[#858585] mb-3">Contact me</div>
+                        <div className="rounded-xl border border-[#F3B6D3] bg-[#FFF7FB] p-4 sm:p-6 xl:p-5 flex flex-col xl:flex-1 xl:min-h-0">
+                          <div className="text-[12px] text-[#8A4A69] mb-3">Contact me</div>
 
                           <form onSubmit={onSubmitContact} className="flex-1 flex flex-col gap-3 min-h-0">
                             <input
                               value={contactName}
                               onChange={(e) => setContactName(e.target.value)}
                               placeholder="Name"
-                              className="h-10 px-3 rounded-md bg-[#161616] border border-[#2B2B2B] text-[#D4D4D4] placeholder:text-[#6E6E6E] outline-none focus:border-[#007ACC]"
+                              className="h-10 px-3 rounded-md bg-[#FFFFFF] border border-[#F3B6D3] text-[#3A0F24] placeholder:text-[#B77A97] outline-none focus:border-[#FF4FA3]"
                             />
 
                             <input
@@ -373,7 +308,7 @@ export default function Home() {
                               onChange={(e) => setContactEmail(e.target.value)}
                               placeholder="Email"
                               type="email"
-                              className="h-10 px-3 rounded-md bg-[#161616] border border-[#2B2B2B] text-[#D4D4D4] placeholder:text-[#6E6E6E] outline-none focus:border-[#007ACC]"
+                              className="h-10 px-3 rounded-md bg-[#FFFFFF] border border-[#F3B6D3] text-[#3A0F24] placeholder:text-[#B77A97] outline-none focus:border-[#FF4FA3]"
                             />
 
                             <textarea
@@ -381,17 +316,17 @@ export default function Home() {
                               onChange={(e) => setContactMsg(e.target.value)}
                               placeholder="Message"
                               rows={6}
-                              className="flex-1 min-h-[120px] px-3 py-2 rounded-md bg-[#161616] border border-[#2B2B2B] text-[#D4D4D4] placeholder:text-[#6E6E6E] outline-none focus:border-[#007ACC] resize-none"
+                              className="flex-1 min-h-30 px-3 py-2 rounded-md bg-[#FFFFFF] border border-[#F3B6D3] text-[#3A0F24] placeholder:text-[#B77A97] outline-none focus:border-[#FF4FA3] resize-none"
                             />
 
-                            <div className="text-[12px] text-[#858585]">
+                            <div className="text-[12px] text-[#8A4A69]">
                               Sends via your email app to{" "}
-                              <span className="text-[#CCCCCC]">zehraahmedzaidi@gmail.com</span>
+                              <span className="text-[#6B2B4A]">zehraahmedzaidi@gmail.com</span>
                             </div>
 
                             <button
                               type="submit"
-                              className="h-10 rounded-md bg-[#007ACC] hover:bg-[#0987d1] text-white text-[13px] font-semibold"
+                              className="h-10 rounded-md bg-[#FF4FA3] hover:bg-[#FF3797] text-white text-[13px] font-semibold"
                             >
                               Send email
                             </button>
@@ -402,8 +337,8 @@ export default function Home() {
                   </div>
 
                   {/* Bottom */}
-                  <div className="h-7 bg-[#007ACC] flex items-center justify-between px-3 text-white text-[12px] shrink-0">
-                    <span className="font-semibold">Zehra's Portfolio</span>
+                  <div className="h-7 bg-[#FF4FA3] flex items-center justify-between px-3 text-white text-[12px] shrink-0">
+                    <span className="font-semibold">Zehra&apos;s Portfolio</span>
                     <span className="opacity-90">@Zehra2026</span>
                   </div>
                 </div>
@@ -417,7 +352,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="w-full h-full overflow-hidden bg-[#0F111A]"
+            className="w-full h-full overflow-hidden bg-[#FFF6FA]" /* was #0F111A */
           >
             <Container fullPage onBack={() => setInstalled(false)} />
           </motion.div>

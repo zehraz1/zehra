@@ -44,7 +44,7 @@ function wrapToWidth(text, maxChars) {
 
 function Badge({ children }) {
   return (
-    <span className="inline-flex items-center rounded-md border border-[#3C3C3C] bg-[#2A2A2A] px-2 py-0.5 text-[11px] text-[#D4D4D4]">
+    <span className="inline-flex items-center rounded-md border border-[#F3B6D3] bg-[#FFF0F7] px-2 py-0.5 text-[11px] text-[#6B2B4A]">
       {children}
     </span>
   );
@@ -54,72 +54,80 @@ function ExtensionsExperienceView({ items }) {
   return (
     <div className="p-3 sm:p-6">
       <div className="mb-3 sm:mb-6">
-        <div className="text-[#D4D4D4] text-[16px] sm:text-[18px] font-semibold">
+        <div className="text-[#3A0F24] text-[16px] sm:text-[18px] font-semibold">
           Experience
         </div>
       </div>
 
       {/* SCROLLER */}
       <div
-        className="max-h-[calc(100vh-220px)] sm:max-h-[calc(100vh-260px)] overflow-y-auto pr-1"
+        className="subtleScroll max-h-[calc(100vh-220px)] sm:max-h-[calc(100vh-260px)] overflow-y-auto pr-1"
         style={{ scrollbarGutter: "stable" }}
       >
+
         <div className="space-y-3 sm:space-y-4">
           {items.map((role) => (
             <div
               key={role.id}
-              className="rounded-xl border border-[#2D2D2D] bg-[#252526] hover:bg-[#2A2A2A] transition-colors"
+              className="rounded-xl border border-[#F3B6D3] bg-[#FFF7FB] hover:bg-[#FFEFF7] transition-colors"
             >
-              <div className="p-3 sm:p-5 flex flex-col sm:flex-row gap-3 sm:gap-4">
-                <div className="flex items-start gap-3 min-w-0">
-                  <div className="shrink-0">
-                    <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-lg bg-[#1E1E1E] border border-[#3C3C3C] flex items-center justify-center text-[#4FC1FF] font-bold text-[13px] sm:text-[14px]">
-                      {role.logoText ?? "GD"}
+              {/* ONLY CHANGE: flex → grid on sm+ */}
+              <div className="p-3 sm:p-5 flex flex-col sm:grid sm:grid-cols-[1fr_150px] gap-3 sm:gap-4">
+                {/* LEFT COLUMN */}
+                <div>
+                  <div className="flex items-start gap-3 min-w-0">
+                    <div className="shrink-0">
+                      <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-lg bg-[#FFFFFF] border border-[#F3B6D3] flex items-center justify-center text-[#FF4FA3] font-bold text-[13px] sm:text-[14px]">
+                        {role.logoText ?? "GD"}
+                      </div>
+                    </div>
+
+                    <div className="min-w-0 flex-1">
+                      <div className="text-[#3A0F24] text-[13px] sm:text-[15px] font-semibold leading-snug whitespace-normal break-words">
+                        {role.title}
+                      </div>
+
+                      <div className="text-[#6B2B4A] text-[11.5px] sm:text-[13px] mt-0.5 leading-snug whitespace-normal break-words">
+                        {role.company}{" "}
+                        <span className="text-[#8A4A69]">
+                          <br />
+                          {role.dates}
+                        </span>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="min-w-0 flex-1">
-                    <div className="text-[#FFFFFF] text-[13px] sm:text-[15px] font-semibold leading-snug break-words whitespace-normal">
-                      {role.title}
+                  {/* TOOLS */}
+                  {role.tools?.length > 0 && (
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {role.tools.map((t) => (
+                        <Badge key={t}>{t}</Badge>
+                      ))}
                     </div>
+                  )}
 
-                    <div className="text-[#CCCCCC] text-[11.5px] sm:text-[13px] mt-0.5 leading-snug break-words whitespace-normal">
-                      {role.company}{" "}
-                      <span className="text-[#858585]">• {role.dates}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex sm:justify-end">
-                  <button
-                    type="button"
-                    className="h-8 px-3 rounded-md bg-[#007ACC] hover:bg-[#0A84D6] text-white text-[12px] font-semibold w-full sm:w-auto"
-                    title="Visual only"
-                  >
-                    Internship
-                  </button>
-                </div>
-
-                <div className="mt-1 sm:mt-0 sm:ml-auto sm:w-full">
-                  <div className="flex flex-wrap gap-2">
-                    {role.tools.map((t) => (
-                      <Badge key={t}>{t}</Badge>
-                    ))}
-                  </div>
-
-                  <div className="mt-3 text-[#D4D4D4] text-[12px] sm:text-[13px] leading-relaxed break-words whitespace-normal">
+                  {/* SUMMARY */}
+                  <div className="mt-3 text-[#4A1630] text-[12px] sm:text-[13px] leading-relaxed break-words whitespace-normal">
                     {role.summary}
                   </div>
 
-                  <div className="mt-4 flex flex-wrap items-center gap-2 sm:gap-3 text-[11px] text-[#858585] break-words">
-                    <span className="inline-flex items-center gap-1">
-                      <span className="text-[#D4D4D4]">★</span> 5.0
-                    </span>
-                    <span className="hidden sm:inline">•</span>
+                  {/* META */}
+                  <div className="mt-4 flex flex-wrap items-center gap-2 sm:gap-3 text-[11px] text-[#8A4A69] break-words">
                     <span>{role.location}</span>
                     <span className="hidden sm:inline">•</span>
-                    <span className="text-[#CCCCCC]">{role.team}</span>
+                    <span className="text-[#6B2B4A]">{role.team}</span>
                   </div>
+                </div>
+
+                {/* RIGHT COLUMN — ROLE TYPE */}
+                <div className="flex sm:justify-end sm:items-start">
+                  <button
+                    type="button"
+                    className="h-8 px-3 rounded-md bg-[#FF4FA3] hover:bg-[#FF3797] text-white text-[12px] font-semibold w-full sm:w-auto"
+                    title="Role type"
+                  >
+                    {role.roleType ?? "Experience"}
+                  </button>
                 </div>
               </div>
             </div>
@@ -135,36 +143,37 @@ function ExtensionsProjectsView({ items }) {
   return (
     <div className="p-3 sm:p-6">
       <div className="mb-3 sm:mb-6">
-        <div className="text-[#D4D4D4] text-[16px] sm:text-[18px] font-semibold">
+        <div className="text-[#3A0F24] text-[16px] sm:text-[18px] font-semibold">
           Projects
         </div>
       </div>
 
       {/* SCROLLER */}
       <div
-        className="max-h-[calc(100vh-220px)] sm:max-h-[calc(100vh-260px)] overflow-y-auto pr-1"
+        className="subtleScroll max-h-[calc(100vh-220px)] sm:max-h-[calc(100vh-260px)] overflow-y-auto pr-1"
         style={{ scrollbarGutter: "stable" }}
       >
+
         <div className="space-y-3 sm:space-y-4">
           {items.map((p) => (
             <div
               key={p.id}
-              className="rounded-xl border border-[#2D2D2D] bg-[#252526] hover:bg-[#2A2A2A] transition-colors"
+              className="rounded-xl border border-[#F3B6D3] bg-[#FFF7FB] hover:bg-[#FFEFF7] transition-colors"
             >
               <div className="p-3 sm:p-5">
                 <div className="flex flex-col md:flex-row md:items-start md:gap-5 gap-3">
                   <div className="shrink-0">
-                    <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-lg bg-[#1E1E1E] border border-[#3C3C3C] flex items-center justify-center text-[#4FC1FF] font-bold text-[13px] sm:text-[14px]">
+                    <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-lg bg-[#FFFFFF] border border-[#F3B6D3] flex items-center justify-center text-[#FF4FA3] font-bold text-[13px] sm:text-[14px]">
                       {p.logoText ?? "PR"}
                     </div>
                   </div>
 
                   <div className="min-w-0 flex-1">
-                    <div className="text-[#FFFFFF] text-[13px] sm:text-[15px] font-semibold leading-snug break-words whitespace-normal">
+                    <div className="text-[#3A0F24] text-[13px] sm:text-[15px] font-semibold leading-snug break-words whitespace-normal">
                       {p.title}
                     </div>
 
-                    <div className="mt-2 text-[#D4D4D4] text-[12px] sm:text-[13px] leading-relaxed break-words whitespace-normal">
+                    <div className="mt-2 text-[#4A1630] text-[12px] sm:text-[13px] leading-relaxed break-words whitespace-normal">
                       {p.description}
                     </div>
 
@@ -176,36 +185,22 @@ function ExtensionsProjectsView({ items }) {
                   </div>
 
                   <div className="md:w-[220px] w-full flex flex-col gap-2 md:items-end">
-                    <button
-                      type="button"
-                      className="h-8 px-3 rounded-md bg-[#007ACC] hover:bg-[#0A84D6] text-white text-[12px] font-semibold w-full md:w-auto"
-                      title="Visual only"
-                    >
-                      Project
-                    </button>
-
                     {p.githubUrl ? (
                       <a
                         href={p.githubUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="w-full md:w-auto inline-flex items-center justify-center gap-2 h-8 px-3 rounded-md border border-[#3C3C3C] bg-[#1E1E1E] hover:bg-[#232323] text-[12px] text-[#D4D4D4]"
+                        className="w-full md:w-auto inline-flex items-center justify-center gap-2 h-8 px-3 rounded-md border border-[#F3B6D3] bg-[#FFF0F7] hover:bg-[#FFE4F0] text-[12px] text-[#3A0F24]"
                         title="Open GitHub"
                       >
-                        <span className="text-[#CCCCCC]">GitHub</span>
-                        <span className="text-[#858585]">↗</span>
+                        <span className="text-[#6B2B4A]">GitHub</span>
+                        <span className="text-[#8A4A69]">↗</span>
                       </a>
                     ) : (
-                      <div className="text-[#858585] text-[12px] w-full md:w-auto text-center md:text-right">
+                      <div className="text-[#8A4A69] text-[12px] w-full md:w-auto text-center md:text-right">
                         GitHub: Coming soon
                       </div>
                     )}
-
-                    {p.githubLabel ? (
-                      <div className="hidden md:block text-[11px] text-[#858585] text-right break-words">
-                        {p.githubLabel}
-                      </div>
-                    ) : null}
                   </div>
                 </div>
               </div>
@@ -221,8 +216,8 @@ function SkillPill({ name, iconUrl, fallback }) {
   const [imgOk, setImgOk] = useState(true);
 
   return (
-    <div className="flex items-center gap-2 rounded-md border border-[#2D2D2D] bg-[#1E1E1E] hover:bg-[#2A2A2A] transition-colors px-2.5 py-2 min-w-0">
-      <div className="h-6 w-6 rounded bg-[#252526] border border-[#3C3C3C] flex items-center justify-center shrink-0 overflow-hidden">
+    <div className="flex items-center gap-2 rounded-md border border-[#F3B6D3] bg-[#FFFFFF] hover:bg-[#FFEFF7] transition-colors px-2.5 py-2 min-w-0">
+      <div className="h-6 w-6 rounded bg-[#FFF0F7] border border-[#F3B6D3] flex items-center justify-center shrink-0 overflow-hidden">
         {iconUrl && imgOk ? (
           <img
             src={iconUrl}
@@ -231,13 +226,13 @@ function SkillPill({ name, iconUrl, fallback }) {
             onError={() => setImgOk(false)}
           />
         ) : (
-          <span className="text-[10px] text-[#4FC1FF] font-bold">
+          <span className="text-[10px] text-[#FF4FA3] font-bold">
             {fallback ?? name.slice(0, 2).toUpperCase()}
           </span>
         )}
       </div>
 
-      <div className="text-[12px] sm:text-[13px] text-[#D4D4D4] truncate">
+      <div className="text-[12px] sm:text-[13px] text-[#4A1630] truncate">
         {name}
       </div>
     </div>
@@ -246,15 +241,15 @@ function SkillPill({ name, iconUrl, fallback }) {
 
 function SkillsSection({ title, items }) {
   return (
-    <div className="rounded-xl border border-[#2D2D2D] bg-[#252526]">
-      <div className="p-3 sm:p-5 border-b border-[#2D2D2D]">
-        <div className="text-[#FFFFFF] text-[13px] sm:text-[15px] font-semibold">
+    <div className="rounded-xl border border-[#F3B6D3] bg-[#FFF7FB]">
+      <div className="p-3 sm:p-5 border-b border-[#F3B6D3]">
+        <div className="text-[#3A0F24] text-[13px] sm:text-[15px] font-semibold">
           {/* On very small screens, allow full wrap */}
           <span className="block sm:inline break-words whitespace-normal">
             {title}
           </span>
         </div>
-        <div className="text-[#858585] text-[11.5px] sm:text-[12px] mt-1">
+        <div className="text-[#8A4A69] text-[11.5px] sm:text-[12px] mt-1">
           {items.length} items
         </div>
       </div>
@@ -280,16 +275,17 @@ function ExtensionsSkillsView({ languages, tools }) {
   return (
     <div className="p-3 sm:p-6">
       <div className="mb-3 sm:mb-6">
-        <div className="text-[#D4D4D4] text-[16px] sm:text-[18px] font-semibold">
+        <div className="text-[#3A0F24] text-[16px] sm:text-[18px] font-semibold">
           Skills
         </div>
       </div>
 
       {/* SCROLLER */}
       <div
-        className="max-h-[calc(100vh-220px)] sm:max-h-[calc(100vh-260px)] overflow-y-auto pr-1"
+        className="subtleScroll max-h-[calc(100vh-220px)] sm:max-h-[calc(100vh-260px)] overflow-y-auto pr-1"
         style={{ scrollbarGutter: "stable" }}
       >
+
         <div className="space-y-3 sm:space-y-4">
           <SkillsSection title="Languages" items={languages} />
           <SkillsSection title="Developer Tools & Technologies" items={tools} />
@@ -312,17 +308,38 @@ export default function Container({ fullPage = false, onBack } = {}) {
         logoText: "GD",
         location: "Calgary, AB",
         team: "ASIS Team",
-        tools: [
-          "Python",
-          ".NET Framework",
-          "C#",
-          "XAML",
-          "Squish",
-          "MVVM",
-          "SAFe",
-        ],
+        roleType: "Internship",
+        tools: ["Python", ".NET Framework", "C#", "XAML", "Squish", "MVVM", "SAFe"],
         summary:
           "Developed and implemented mission-critical .NET Framework features in C#, enhancing LAV 6 radio communication and simplifying crew operations in high-stress environments.",
+      },
+
+      {
+        id: "sec-2024",
+        company: "Schulich Engineering Competition",
+        title: "Programming Director",
+        dates: "August 2024 – September 2024",
+        logoText: "SEC",
+        location: "Calgary, AB",
+        team: "UofC Club",
+        roleType: "Leadership",
+        tools: [],
+        summary:
+          "Led the development of an engineering programming challenge for competition participants, designing a prompt that tested problem-solving and technical coding skills.",
+      },
+
+      {
+        id: "cec-2024",
+        company: "CFES Canadian Engineering Competition",
+        title: "Consulting Director",
+        dates: "September 2023 – March 2024",
+        logoText: "CEC",
+        location: "Calgary, AB",
+        team: "UofC Club",
+        roleType: "Leadership",
+        tools: [],
+        summary:
+          "Directed the development of a detailed prompt for national engineering competitors, aligning with the competition’s main objectives and emphasizing energy and sustainability.",
       },
     ],
     []
@@ -493,15 +510,62 @@ export default function Container({ fullPage = false, onBack } = {}) {
   const projects = useMemo(
     () => [
       {
+        id: "hack-the-bias",
+        title: "Hack the Bias 2026 – Miss Neuroverse",
+        logoText: "🧠",
+        githubUrl: "https://github.com/Fatima4285/Hack_the_Bias_2026",
+        githubLabel: "Hack_the_Bias_2026",
+        description:
+          "Built a full-stack platform in a 36-hour hackathon with a team of five to bridge the gap between neurodivergent women and researchers, expanding research in a field shaped by gender bias. Designed a two-sided, opt-in system where women log experiences and wellness data to receive personalized research and similar lived experiences, while researchers post studies surfaced to relevant users.",
+        languages: ["Next.js", "TypeScript", "Tailwind CSS", "Firebase"],
+      },
+
+      {
+        id: "ecommerce",
+        title: "Full-Stack E-Commerce Website",
+        logoText: "🛒",
+        githubUrl:
+          "https://github.com/zehraz1/projects/tree/main/E-commerce%20React",
+        githubLabel: "projects / E-commerce React",
+        description:
+          "Designed and developed a full-stack e-commerce website following a provided UI. Implemented a responsive frontend using React and built backend services using Node.js and Flask with JSON data handling.",
+        languages: ["React", "Node.js", "Flask", "JSON"],
+      },
+
+      {
+        id: "disaster-relief",
+        title: "Disaster Victim Relief System",
+        logoText: "🚑",
+        githubUrl:
+          "https://github.com/zehraz1/projects/tree/main/Database%20Java",
+        githubLabel: "projects / Disaster Java",
+        description:
+          "Developed a Java-based disaster relief tracking system with SQL integration to manage shelter assignments and essential services for displaced individuals. Ensured system reliability using JUnit test coverage to reduce runtime errors and validate functionality.",
+        languages: ["Java", "SQL", "JUnit"],
+      },
+
+      {
         id: "cpp-airline",
         title: "C++ Airline Registration System",
-        logoText: "C++",
+        logoText: "✈️",
         githubUrl:
           "https://github.com/zehraz1/projects/tree/main/Airline%20C%2B%2B",
         githubLabel: "projects / Airline C++",
         description:
-          "Developed an airline registration system using C++ that efficiently handles passenger bookings, flight management, and ticketing processes.",
+          "Developed an airline registration system in C++ to efficiently manage passenger bookings, flight records, and ticketing processes using object-oriented design principles.",
         languages: ["C++"],
+      },
+
+      {
+        id: "museum-sql",
+        title: "Arts Museum Database Application",
+        logoText: "🖼️",
+        githubUrl:
+          "https://github.com/zehraz1/projects/tree/main/Museum%20SQL%20Python",
+        githubLabel: "projects / Museum SQL Python",
+        description:
+          "Designed a secure SQL database with role-based access control to enhance data security and retrieval efficiency for museum operations. Built a flexible schema with simulated end-user web access to improve accessibility of collections and exhibitions.",
+        languages: ["Python", "SQL", "Git", "GitHub"],
       },
     ],
     []
@@ -594,25 +658,25 @@ export default function Container({ fullPage = false, onBack } = {}) {
       <div
         className={
           fullPage
-            ? "w-full h-full bg-[#3C3C3C] overflow-hidden shadow-[20px_35px_40px_20px_rgba(0,0,0,.5)] flex flex-col relative"
-            : "bg-[#3C3C3C] rounded-4xl overflow-hidden shadow-[20px_35px_40px_20px_rgba(0,0,0,.5)] relative"
+            ? "w-full h-full bg-[#FFF6FA] overflow-hidden shadow-[20px_35px_40px_20px_rgba(17,24,39,.20)] flex flex-col relative"
+            : "bg-[#FFF6FA] rounded-4xl overflow-hidden shadow-[20px_35px_40px_20px_rgba(17,24,39,.20)] relative"
         }
       >
         {typeof onBack === "function" && (
           <button
             type="button"
             onClick={onBack}
-            className="absolute left-2 top-2 z-50 h-6 sm:h-8 px-2 sm:px-3 rounded-md bg-[#252526] border border-[#2B2B2B] text-[#D4D4D4] text-[10px] sm:text-[12px] hover:bg-[#2D2D2D] flex items-center gap-1.5 sm:gap-2"
+            className="absolute left-2 top-2 z-50 h-6 sm:h-8 px-2 sm:px-3 rounded-md bg-[#FFF0F7] border border-[#F3B6D3] text-[#6B2B4A] text-[10px] sm:text-[12px] hover:bg-[#FFE4F0] flex items-center gap-1.5 sm:gap-2"
             title="Back to Extensions page"
           >
-            <span className="text-[#4FC1FF] text-[12px] sm:text-[14px]">←</span>
+            <span className="text-[#FF4FA3] text-[12px] sm:text-[14px]">←</span>
             Back
           </button>
         )}
 
         {/* Top bar */}
         <div className="h-12 flex items-center justify-center px-4 shrink-0 relative">
-          <h1 className="text-[#D4D4D4] tracking-[0.1rem] text-[18px]">
+          <h1 className="text-[#3A0F24] tracking-[0.1rem] text-[18px]">
             zehra-portfolio
           </h1>
         </div>
@@ -630,10 +694,11 @@ export default function Container({ fullPage = false, onBack } = {}) {
           `}
         >
           {/* Icon bar */}
-          <div className="bg-[#333333] p-2 pt-1 flex flex-col items-center h-full min-h-0">
-            <div className="flex flex-col items-center gap-2 w-full min-h-0 overflow-y-auto pb-2">
-              <button
-                className="w-10 h-10 flex items-center justify-center rounded-md hover:bg-[#2A2A2A] shrink-0"
+          {/* Icon bar */}
+          <div className="bg-[#FFE4F0] p-2 pt-1 flex flex-col items-center h-full min-h-0 border-r border-[#F3B6D3] overflow-x-hidden">
+            <div className="flex flex-col items-center gap-2 w-full min-h-0 overflow-y-auto overflow-x-hidden pb-2 px-1">
+          <button
+                className="w-10 h-10 flex items-center justify-center rounded-md hover:bg-[#FFEFF7] shrink-0"
                 title="Explorer"
                 type="button"
                 onClick={() => setSidebarOpen((v) => !v)}
@@ -644,7 +709,7 @@ export default function Container({ fullPage = false, onBack } = {}) {
                   viewBox="0 0 24 24"
                   strokeWidth={2}
                   stroke="currentColor"
-                  className="size-7 text-[#D4D4D4]"
+                  className="size-7 text-[#3A0F24]"
                 >
                   <path
                     strokeLinecap="round"
@@ -655,7 +720,7 @@ export default function Container({ fullPage = false, onBack } = {}) {
               </button>
 
               <button
-                className="w-10 h-10 flex items-center justify-center rounded-md hover:bg-[#2A2A2A] shrink-0"
+                className="w-10 h-10 flex items-center justify-center rounded-md hover:bg-[#FFEFF7] shrink-0"
                 title="Search"
                 type="button"
               >
@@ -665,7 +730,7 @@ export default function Container({ fullPage = false, onBack } = {}) {
                   viewBox="0 0 24 24"
                   strokeWidth={2}
                   stroke="currentColor"
-                  className="size-6 text-[#858585]"
+                  className="size-6 text-[#8A4A69]"
                 >
                   <path
                     strokeLinecap="round"
@@ -676,7 +741,7 @@ export default function Container({ fullPage = false, onBack } = {}) {
               </button>
 
               <button
-                className="w-10 h-10 flex items-center justify-center rounded-md hover:bg-[#2A2A2A] shrink-0"
+                className="w-10 h-10 flex items-center justify-center rounded-md hover:bg-[#FFEFF7] shrink-0"
                 title="Source Control"
                 type="button"
               >
@@ -686,7 +751,7 @@ export default function Container({ fullPage = false, onBack } = {}) {
                   viewBox="0 0 24 24"
                   strokeWidth={2}
                   stroke="currentColor"
-                  className="size-6 text-[#858585]"
+                  className="size-6 text-[#8A4A69]"
                 >
                   <path
                     strokeLinecap="round"
@@ -702,7 +767,7 @@ export default function Container({ fullPage = false, onBack } = {}) {
               </button>
 
               <button
-                className="w-10 h-10 flex items-center justify-center rounded-md hover:bg-[#2A2A2A] shrink-0"
+                className="w-10 h-10 flex items-center justify-center rounded-md hover:bg-[#FFEFF7] shrink-0"
                 title="Run and Debug"
                 type="button"
               >
@@ -712,7 +777,7 @@ export default function Container({ fullPage = false, onBack } = {}) {
                   viewBox="0 0 24 24"
                   strokeWidth={2}
                   stroke="currentColor"
-                  className="size-6 text-[#858585]"
+                  className="size-6 text-[#8A4A69]"
                 >
                   <path
                     strokeLinecap="round"
@@ -723,7 +788,7 @@ export default function Container({ fullPage = false, onBack } = {}) {
               </button>
 
               <button
-                className="w-10 h-10 flex items-center justify-center rounded-md hover:bg-[#2A2A2A] shrink-0"
+                className="w-10 h-10 flex items-center justify-center rounded-md hover:bg-[#FFEFF7] shrink-0"
                 title="Extensions"
                 type="button"
               >
@@ -733,7 +798,7 @@ export default function Container({ fullPage = false, onBack } = {}) {
                   viewBox="0 0 24 24"
                   strokeWidth={2}
                   stroke="currentColor"
-                  className="size-6 text-[#858585]"
+                  className="size-6 text-[#8A4A69]"
                 >
                   <path
                     strokeLinecap="round"
@@ -746,17 +811,17 @@ export default function Container({ fullPage = false, onBack } = {}) {
           </div>
 
           {/* Sidebar */}
-          <div className="bg-[#252526] text-[#D4D4D4] min-w-0 overflow-y-hidden overflow-x-visible">
-            <div className="h-12 box-border px-2 sm:px-4 flex items-center justify-between border-b border-[#3C3C3C]">
+          <div className="bg-[#FFF7FB] text-[#3A0F24] min-w-0 overflow-y-hidden overflow-x-visible border-r border-[#F3B6D3]">
+            <div className="h-12 box-border px-2 sm:px-4 flex items-center justify-between border-b border-[#F3B6D3]">
               {sidebarOpen ? (
                 <>
-                  <span className="uppercase tracking-[0.18em] text-[11px] font-semibold text-[#CCCCCC] truncate leading-none translate-y-[1px]">
+                  <span className="uppercase tracking-[0.18em] text-[11px] font-semibold text-[#6B2B4A] truncate leading-none translate-y-[1px]">
                     Explorer
                   </span>
 
                   <button
                     onClick={() => setSidebarOpen(false)}
-                    className="h-8 w-8 flex items-center justify-center rounded-md text-[#858585] hover:text-[#D4D4D4] hover:bg-[#2D2D2D] select-none"
+                    className="h-8 w-8 flex items-center justify-center rounded-md text-[#8A4A69] hover:text-[#3A0F24] hover:bg-[#FFEFF7] select-none"
                     title="Collapse"
                     type="button"
                   >
@@ -766,7 +831,7 @@ export default function Container({ fullPage = false, onBack } = {}) {
               ) : (
                 <button
                   onClick={() => setSidebarOpen(true)}
-                  className="h-8 w-8 flex items-center justify-center mx-auto rounded-md hover:bg-[#2D2D2D] text-[14px] font-semibold text-[#858585] hover:text-[#D4D4D4] select-none"
+                  className="h-8 w-8 flex items-center justify-center mx-auto rounded-md hover:bg-[#FFEFF7] text-[14px] font-semibold text-[#8A4A69] hover:text-[#3A0F24] select-none"
                   title="Expand"
                   type="button"
                 >
@@ -777,8 +842,8 @@ export default function Container({ fullPage = false, onBack } = {}) {
 
             {sidebarOpen && (
               <div className="p-2 sm:p-4 space-y-2">
-                <div className="flex items-center gap-2 text-[#CCCCCC] text-[12px] font-semibold">
-                  <span className="text-[#858585]">▾</span>
+                <div className="flex items-center gap-2 text-[#6B2B4A] text-[12px] font-semibold">
+                  <span className="text-[#8A4A69]">▾</span>
                   <span className="truncate">zehra-portfolio</span>
                 </div>
 
@@ -791,12 +856,12 @@ export default function Container({ fullPage = false, onBack } = {}) {
                         onClick={() => openFile(file.id)}
                         className={`w-full text-left rounded-md px-2 py-1.5 flex items-center gap-2 text-[13px] ${
                           isActive
-                            ? "text-[#FFFFFF] bg-[#094771]"
-                            : "text-[#CCCCCC] hover:bg-[#2D2D2D]"
+                            ? "text-[#3A0F24] bg-[#FFE4F0]"
+                            : "text-[#6B2B4A] hover:bg-[#FFEFF7]"
                         }`}
                         type="button"
                       >
-                        <span className="text-[12px] text-[#858585]">
+                        <span className="text-[12px] text-[#8A4A69]">
                           {iconFor(file.label)}
                         </span>
                         <span className="truncate">{file.label}</span>
@@ -809,9 +874,9 @@ export default function Container({ fullPage = false, onBack } = {}) {
           </div>
 
           {/* Editor */}
-          <div className="min-w-0 overflow-hidden bg-[#1E1E1E] flex flex-col">
+          <div className="min-w-0 overflow-hidden bg-[#FFFFFF] flex flex-col">
             {/* Tabs */}
-            <div className="h-12 box-border border-b border-[#3C3C3C] bg-[#252526]">
+            <div className="h-12 box-border border-b border-[#F3B6D3] bg-[#FFF0F7]">
               <div
                 ref={tabsRef}
                 className="tabsScroll h-full pl-0 pr-0 flex items-center gap-0 flex-nowrap overflow-x-auto overflow-y-hidden"
@@ -825,18 +890,18 @@ export default function Container({ fullPage = false, onBack } = {}) {
                     <button
                       key={tabId}
                       onClick={() => setActiveFileId(tabId)}
-                      className={`shrink-0 h-full px-3 flex items-center gap-2 border-r border-[#2B2B2B] relative ${
+                      className={`shrink-0 h-full px-3 flex items-center gap-2 border-r border-[#F3B6D3] relative ${
                         isActive
-                          ? "bg-[#1E1E1E] text-[#FFFFFF]"
-                          : "bg-[#2D2D2D] text-[#CCCCCC] hover:bg-[#323232]"
+                          ? "bg-[#FFFFFF] text-[#3A0F24]"
+                          : "bg-[#FFE4F0] text-[#6B2B4A] hover:bg-[#FFD8EA]"
                       } whitespace-nowrap`}
                       type="button"
                     >
                       {isActive && (
-                        <span className="absolute left-0 right-0 top-0 h-[2px] bg-[#007ACC]" />
+                        <span className="absolute left-0 right-0 top-0 h-[2px] bg-[#FF4FA3]" />
                       )}
 
-                      <span className="text-[12px] text-[#858585]">
+                      <span className="text-[12px] text-[#8A4A69]">
                         {iconFor(file?.label ?? tabId)}
                       </span>
 
@@ -847,10 +912,10 @@ export default function Container({ fullPage = false, onBack } = {}) {
                           e.stopPropagation();
                           if (!isLastTab) closeTab(tabId);
                         }}
-                        className={`ml-1 text-[#858585] hover:text-[#D4D4D4] px-1 rounded ${
+                        className={`ml-1 text-[#8A4A69] hover:text-[#3A0F24] px-1 rounded ${
                           isLastTab
                             ? "pointer-events-none opacity-30"
-                            : "hover:bg-[#3A3A3A]"
+                            : "hover:bg-[#FFEFF7]"
                         }`}
                         title={isLastTab ? "Can't close last tab" : "Close"}
                       >
@@ -875,7 +940,7 @@ export default function Container({ fullPage = false, onBack } = {}) {
                 />
               ) : (
                 <div className="grid grid-cols-[34px_1fr] sm:grid-cols-[48px_1fr]">
-                  <div className="py-4 sm:py-6 pr-2 sm:pr-3 text-right text-[#858585] select-none border-r border-[#2D2D2D]">
+                  <div className="py-4 sm:py-6 pr-2 sm:pr-3 text-right text-[#8A4A69] select-none border-r border-[#F3B6D3]">
                     {displayLines.map((_, i) => (
                       <div key={i}>{i + 1}</div>
                     ))}
@@ -883,7 +948,7 @@ export default function Container({ fullPage = false, onBack } = {}) {
 
                   <div
                     ref={textColRef}
-                    className="p-4 sm:p-6 text-[#D4D4D4] font-mono min-w-0"
+                    className="p-4 sm:p-6 text-[#4A1630] font-mono min-w-0"
                   >
                     {displayLines.map((line, i) => (
                       <div key={i}>{line === "" ? "\u00A0" : line}</div>
@@ -893,7 +958,7 @@ export default function Container({ fullPage = false, onBack } = {}) {
               )}
             </div>
 
-            <div className="h-8 bg-[#007ACC] text-white text-[12px] flex items-center justify-between px-3">
+            <div className="h-8 bg-[#FF4FA3] text-white text-[12px] flex items-center justify-between px-3">
               <div className="flex items-center gap-3">
                 <span className="font-semibold">main</span>
                 <span className="opacity-90 hidden sm:inline">◦</span>
@@ -921,6 +986,39 @@ export default function Container({ fullPage = false, onBack } = {}) {
           .tabsScroll::-webkit-scrollbar {
             height: 0px;
           }
+          /* Subtle scrollbars (mobile/small screens) */
+          .subtleScroll {
+            scrollbar-width: thin; /* Firefox */
+            scrollbar-color: rgba(255, 79, 163, 0.28) transparent;
+          }
+
+          .subtleScroll::-webkit-scrollbar {
+            width: 6px;
+          }
+
+          .subtleScroll::-webkit-scrollbar-track {
+            background: transparent;
+          }
+
+          .subtleScroll::-webkit-scrollbar-thumb {
+            background: rgba(255, 79, 163, 0.22);
+            border-radius: 999px;
+          }
+
+          .subtleScroll::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 79, 163, 0.35);
+          }
+
+          /* Large screens: hide the scrollbar (still scrollable) */
+          @media (min-width: 1024px) {
+            .subtleScroll {
+              scrollbar-width: none; /* Firefox */
+            }
+            .subtleScroll::-webkit-scrollbar {
+              width: 0px; /* Chrome/Safari */
+            }
+          }
+
         `}</style>
       </div>
     </div>
