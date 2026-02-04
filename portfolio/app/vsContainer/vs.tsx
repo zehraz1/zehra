@@ -1,7 +1,7 @@
 "use client";
 import { useMemo, useRef, useLayoutEffect, useState } from "react";
 
-function wrapToWidth(text, maxChars) {
+function wrapToWidth(text: string, maxChars: number) {
   const paragraphs = text.split("\n");
   const out = [];
 
@@ -641,7 +641,7 @@ export default function Container({ fullPage = false, onBack } = {}) {
   );
 
   const tabsRef = useRef(null);
-  const iconFor = (name) => (name.endsWith(".md") ? "📝" : "📄");
+  const iconFor = "📄";
 
   const isExperienceTab = activeFileId === "experience";
   const isProjectsTab = activeFileId === "projects";
@@ -862,7 +862,7 @@ export default function Container({ fullPage = false, onBack } = {}) {
                         type="button"
                       >
                         <span className="text-[12px] text-[#8A4A69]">
-                          {iconFor(file.label)}
+                          {iconFor}
                         </span>
                         <span className="truncate">{file.label}</span>
                       </button>
@@ -902,7 +902,7 @@ export default function Container({ fullPage = false, onBack } = {}) {
                       )}
 
                       <span className="text-[12px] text-[#8A4A69]">
-                        {iconFor(file?.label ?? tabId)}
+                        {iconFor}
                       </span>
 
                       <span className="text-[13px]">{file?.label ?? tabId}</span>
