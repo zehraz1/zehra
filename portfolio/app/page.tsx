@@ -31,18 +31,11 @@ export default function Home() {
 
   // --- Marketplace stats (realistic counters starting at 0) ---
   const DEFAULT_DOWNLOADS = 0;
-  const DEFAULT_INSTALLS = 0;
 
   const [downloadsCount, setDownloadsCount] = useState<number>(() => {
     if (typeof window === "undefined") return DEFAULT_DOWNLOADS;
     const saved = window.localStorage.getItem("zp_downloads");
     return saved ? Number(saved) : DEFAULT_DOWNLOADS;
-  });
-
-  const [installsCount, setInstallsCount] = useState<number>(() => {
-    if (typeof window === "undefined") return DEFAULT_INSTALLS;
-    const saved = window.localStorage.getItem("zp_installs");
-    return saved ? Number(saved) : DEFAULT_INSTALLS;
   });
 
   const formatCompact = (n: number) => {
@@ -52,19 +45,16 @@ export default function Home() {
     return n.toLocaleString();
   };
 
-  const formatFull = (n: number) => n.toLocaleString();
-
   const meta = useMemo(
     () => ({
       name: "Zehra Portfolio",
       publisher: "zehra",
       version: "1.0.0",
-      installs: formatFull(installsCount),
       rating: "5.0",
       downloads: formatCompact(downloadsCount),
       category: "Portfolio / Personal",
     }),
-    [installsCount, downloadsCount]
+    [downloadsCount]
   );
 
   const onDownload = () => {
@@ -72,25 +62,11 @@ export default function Home() {
     const downloadsAdd = 1 + Math.floor(Math.random() * 3); // +1 to +3
     const newDownloads = downloadsCount + downloadsAdd;
 
-    // Installs = subset of downloads (conversion)
-    // 25%–55% chance per click
-    const installChance = 0.25 + Math.random() * 0.3;
-    const installsAdd = Math.random() < installChance ? 1 : 0;
-
-    // Keep installs realistically below downloads (but allow growth from 0)
-    const bufferedMaxInstalls = newDownloads;
-    const newInstalls = Math.min(
-      installsCount + installsAdd,
-      bufferedMaxInstalls
-    );
-
     setDownloadsCount(newDownloads);
-    setInstallsCount(newInstalls);
 
     // Persist so it doesn't reset on refresh
     if (typeof window !== "undefined") {
       window.localStorage.setItem("zp_downloads", String(newDownloads));
-      window.localStorage.setItem("zp_installs", String(newInstalls));
     }
 
     // open portfolio view
@@ -213,9 +189,6 @@ export default function Home() {
                               </span>
                               <span className="text-[12px] px-2 py-1 rounded-md bg-[#FFF0F7] border border-[#F3B6D3] text-[#6B2B4A]">
                                 {meta.downloads} downloads
-                              </span>
-                              <span className="text-[12px] px-2 py-1 rounded-md bg-[#FFF0F7] border border-[#F3B6D3] text-[#6B2B4A]">
-                                {meta.installs} installs
                               </span>
 
                               <button
