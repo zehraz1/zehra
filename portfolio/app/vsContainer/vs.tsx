@@ -1,5 +1,36 @@
 "use client";
+import type { ReactNode } from "react";
 import { useMemo, useRef, useLayoutEffect, useState } from "react";
+
+
+type Role = {
+  id: string;
+  company: string;
+  title: string;
+  dates: string;
+  logoText?: string;
+  location: string;
+  team: string;
+  roleType?: string;
+  tools?: string[];
+  summary: string;
+};
+
+type Project = {
+  id: string;
+  title: string;
+  logoText?: string;
+  githubUrl?: string;
+  githubLabel?: string;
+  description: string;
+  languages: string[];
+};
+
+type Skill = {
+  name: string;
+  iconUrl: string | null;
+  fallback?: string;
+};
 
 function wrapToWidth(text: string, maxChars: number) {
   const paragraphs = text.split("\n");
@@ -42,7 +73,7 @@ function wrapToWidth(text: string, maxChars: number) {
   return out;
 }
 
-function Badge({ children }) {
+function Badge({ children }: { children: ReactNode }) {
   return (
     <span className="inline-flex items-center rounded-md border border-[#F3B6D3] bg-[#FFF0F7] px-2 py-0.5 text-[11px] text-[#6B2B4A]">
       {children}
@@ -50,7 +81,7 @@ function Badge({ children }) {
   );
 }
 
-function ExtensionsExperienceView({ items }) {
+function ExtensionsExperienceView({ items }:{items:Role[]}) {
   return (
     <div className="p-3 sm:p-6">
       <div className="mb-3 sm:mb-6">
@@ -98,9 +129,9 @@ function ExtensionsExperienceView({ items }) {
                   </div>
 
                   {/* TOOLS */}
-                  {role.tools?.length > 0 && (
+                  {(role.tools?.length ?? 0) > 0 && (
                     <div className="mt-3 flex flex-wrap gap-2">
-                      {role.tools.map((t) => (
+                      {(role.tools ?? []).map((t) => (
                         <Badge key={t}>{t}</Badge>
                       ))}
                     </div>
@@ -139,7 +170,7 @@ function ExtensionsExperienceView({ items }) {
 }
 
 /* Projects cards look clean on md/lg, still great on mobile */
-function ExtensionsProjectsView({ items }) {
+function ExtensionsProjectsView({ items }:{items:Project[]}) {
   return (
     <div className="p-3 sm:p-6">
       <div className="mb-3 sm:mb-6">
@@ -212,7 +243,7 @@ function ExtensionsProjectsView({ items }) {
   );
 }
 
-function SkillPill({ name, iconUrl, fallback }) {
+function SkillPill({ name, iconUrl, fallback }: {name: string;iconUrl: string | null;fallback?: string;}) {
   const [imgOk, setImgOk] = useState(true);
 
   return (
@@ -239,7 +270,7 @@ function SkillPill({ name, iconUrl, fallback }) {
   );
 }
 
-function SkillsSection({ title, items }) {
+function SkillsSection({ title, items }: { title: string; items: Skill[] }) {
   return (
     <div className="rounded-xl border border-[#F3B6D3] bg-[#FFF7FB]">
       <div className="p-3 sm:p-5 border-b border-[#F3B6D3]">
@@ -271,7 +302,7 @@ function SkillsSection({ title, items }) {
   );
 }
 
-function ExtensionsSkillsView({ languages, tools }) {
+function ExtensionsSkillsView({ languages, tools }: {  languages: Skill[];  tools: Skill[];}) {
   return (
     <div className="p-3 sm:p-6">
       <div className="mb-3 sm:mb-6">
@@ -295,7 +326,12 @@ function ExtensionsSkillsView({ languages, tools }) {
   );
 }
 
-export default function Container({ fullPage = false, onBack } = {}) {
+type ContainerProps = {
+  fullPage?: boolean;
+  onBack?: () => void;
+};
+
+export default function Container({ fullPage = false, onBack }: ContainerProps) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const experienceRoles = useMemo(
@@ -584,13 +620,13 @@ export default function Container({ fullPage = false, onBack } = {}) {
   const [activeFileId, setActiveFileId] = useState(defaultFileId);
   const [openTabs, setOpenTabs] = useState([defaultFileId]);
 
-  function openFile(fileId) {
+  function openFile(fileId: string) {
     setSidebarOpen(true);
     setOpenTabs((tabs) => (tabs.includes(fileId) ? tabs : [...tabs, fileId]));
     setActiveFileId(fileId);
   }
 
-  function closeTab(fileId) {
+  function closeTab(fileId: string) {
     setOpenTabs((tabs) => {
       if (tabs.length === 1 && tabs[0] === fileId) return tabs;
 
@@ -607,7 +643,8 @@ export default function Container({ fullPage = false, onBack } = {}) {
 
   const activeFile = files.find((f) => f.id === activeFileId) ?? files[0];
 
-  const textColRef = useRef(null);
+  const textColRef = useRef<HTMLDivElement | null>(null);
+
   const [maxChars, setMaxChars] = useState(28);
 
   useLayoutEffect(() => {
@@ -640,7 +677,8 @@ export default function Container({ fullPage = false, onBack } = {}) {
     [activeFile.content, maxChars]
   );
 
-  const tabsRef = useRef(null);
+  const tabsRef = useRef<HTMLDivElement | null>(null);
+
   const iconFor = "📄";
 
   const isExperienceTab = activeFileId === "experience";
