@@ -1,6 +1,8 @@
 "use client";
 import type { ReactNode } from "react";
 import { useMemo, useRef, useLayoutEffect, useState } from "react";
+import Image from "next/image";
+
 
 
 type Role = {
@@ -114,11 +116,11 @@ function ExtensionsExperienceView({ items }:{items:Role[]}) {
                     </div>
 
                     <div className="min-w-0 flex-1">
-                      <div className="text-[#3A0F24] text-[13px] sm:text-[15px] font-semibold leading-snug whitespace-normal break-words">
+                      <div className="text-[#3A0F24] text-[13px] sm:text-[15px] font-semibold leading-snug whitespace-normal wrap-break-word">
                         {role.title}
                       </div>
 
-                      <div className="text-[#6B2B4A] text-[11.5px] sm:text-[13px] mt-0.5 leading-snug whitespace-normal break-words">
+                      <div className="text-[#6B2B4A] text-[11.5px] sm:text-[13px] mt-0.5 leading-snug whitespace-normal wrap-break-word">
                         {role.company}{" "}
                         <span className="text-[#8A4A69]">
                           <br />
@@ -138,12 +140,12 @@ function ExtensionsExperienceView({ items }:{items:Role[]}) {
                   )}
 
                   {/* SUMMARY */}
-                  <div className="mt-3 text-[#4A1630] text-[12px] sm:text-[13px] leading-relaxed break-words whitespace-normal">
+                  <div className="mt-3 text-[#4A1630] text-[12px] sm:text-[13px] leading-relaxed wrap-break-wordword whitespace-normal">
                     {role.summary}
                   </div>
 
                   {/* META */}
-                  <div className="mt-4 flex flex-wrap items-center gap-2 sm:gap-3 text-[11px] text-[#8A4A69] break-words">
+                  <div className="mt-4 flex flex-wrap items-center gap-2 sm:gap-3 text-[11px] text-[#8A4A69] wrap-break-word">
                     <span>{role.location}</span>
                     <span className="hidden sm:inline">•</span>
                     <span className="text-[#6B2B4A]">{role.team}</span>
@@ -200,11 +202,11 @@ function ExtensionsProjectsView({ items }:{items:Project[]}) {
                   </div>
 
                   <div className="min-w-0 flex-1">
-                    <div className="text-[#3A0F24] text-[13px] sm:text-[15px] font-semibold leading-snug break-words whitespace-normal">
+                    <div className="text-[#3A0F24] text-[13px] sm:text-[15px] font-semibold leading-snug wrap-break-word whitespace-normal">
                       {p.title}
                     </div>
 
-                    <div className="mt-2 text-[#4A1630] text-[12px] sm:text-[13px] leading-relaxed break-words whitespace-normal">
+                    <div className="mt-2 text-[#4A1630] text-[12px] sm:text-[13px] leading-relaxed wrap-break-word whitespace-normal">
                       {p.description}
                     </div>
 
@@ -215,7 +217,7 @@ function ExtensionsProjectsView({ items }:{items:Project[]}) {
                     </div>
                   </div>
 
-                  <div className="md:w-[220px] w-full flex flex-col gap-2 md:items-end">
+                  <div className="md:w-55 w-full flex flex-col gap-2 md:items-end">
                     {p.githubUrl ? (
                       <a
                         href={p.githubUrl}
@@ -250,10 +252,13 @@ function SkillPill({ name, iconUrl, fallback }: {name: string;iconUrl: string | 
     <div className="flex items-center gap-2 rounded-md border border-[#F3B6D3] bg-[#FFFFFF] hover:bg-[#FFEFF7] transition-colors px-2.5 py-2 min-w-0">
       <div className="h-6 w-6 rounded bg-[#FFF0F7] border border-[#F3B6D3] flex items-center justify-center shrink-0 overflow-hidden">
         {iconUrl && imgOk ? (
-          <img
+          <Image
             src={iconUrl}
             alt={`${name} logo`}
+            width={16}
+            height={16}
             className="h-4 w-4"
+            unoptimized
             onError={() => setImgOk(false)}
           />
         ) : (
@@ -261,6 +266,7 @@ function SkillPill({ name, iconUrl, fallback }: {name: string;iconUrl: string | 
             {fallback ?? name.slice(0, 2).toUpperCase()}
           </span>
         )}
+
       </div>
 
       <div className="text-[12px] sm:text-[13px] text-[#4A1630] truncate">
@@ -276,7 +282,7 @@ function SkillsSection({ title, items }: { title: string; items: Skill[] }) {
       <div className="p-3 sm:p-5 border-b border-[#F3B6D3]">
         <div className="text-[#3A0F24] text-[13px] sm:text-[15px] font-semibold">
           {/* On very small screens, allow full wrap */}
-          <span className="block sm:inline break-words whitespace-normal">
+          <span className="block sm:inline wrap-break-word whitespace-normal">
             {title}
           </span>
         </div>
@@ -722,7 +728,7 @@ export default function Container({ fullPage = false, onBack }: ContainerProps) 
         {/* Body */}
         <div
           className={`
-            grid ${fullPage ? "flex-1" : "h-[520px] sm:h-[600px]"} min-w-0
+            grid ${fullPage ? "flex-1" : "h-130 sm:h-150"} min-w-0
             transition-[grid-template-columns] duration-300
             ${
               sidebarOpen
@@ -853,7 +859,7 @@ export default function Container({ fullPage = false, onBack }: ContainerProps) 
             <div className="h-12 box-border px-2 sm:px-4 flex items-center justify-between border-b border-[#F3B6D3]">
               {sidebarOpen ? (
                 <>
-                  <span className="uppercase tracking-[0.18em] text-[11px] font-semibold text-[#6B2B4A] truncate leading-none translate-y-[1px]">
+                  <span className="uppercase tracking-[0.18em] text-[11px] font-semibold text-[#6B2B4A] truncate leading-none translate-y-px">
                     Explorer
                   </span>
 
@@ -936,7 +942,7 @@ export default function Container({ fullPage = false, onBack }: ContainerProps) 
                       type="button"
                     >
                       {isActive && (
-                        <span className="absolute left-0 right-0 top-0 h-[2px] bg-[#FF4FA3]" />
+                        <span className="absolute left-0 right-0 top-0 h-0.5 bg-[#FF4FA3]" />
                       )}
 
                       <span className="text-[12px] text-[#8A4A69]">

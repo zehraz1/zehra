@@ -4,6 +4,28 @@ import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Container from "./vsContainer/vs";
 
+const GitHubIcon = ({ className = "" }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+    className={className}
+    fill="currentColor"
+  >
+    <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.39 6.84 9.75.5.1.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.38-3.37-1.38-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.08 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.33.1-2.77 0 0 .84-.28 2.75 1.05.8-.23 1.65-.34 2.5-.34.85 0 1.7.12 2.5.34 1.9-1.33 2.74-1.05 2.74-1.05.56 1.44.21 2.51.1 2.77.64.72 1.03 1.63 1.03 2.75 0 3.95-2.34 4.82-4.58 5.08.36.32.68.95.68 1.92 0 1.39-.01 2.5-.01 2.84 0 .27.18.59.69.48A10.05 10.05 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" />
+  </svg>
+);
+
+const LinkedInIcon = ({ className = "" }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+    className={className}
+    fill="currentColor"
+  >
+    <path d="M20.45 20.45H17v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85v5.5H9.66V9h3.32v1.56h.05c.46-.87 1.6-1.8 3.29-1.8 3.52 0 4.17 2.32 4.17 5.34v6.35ZM5.34 7.43a1.93 1.93 0 1 1 0-3.86 1.93 1.93 0 0 1 0 3.86ZM6.98 20.45H3.7V9h3.28v11.45ZM22 2H2v20h20V2Z" />
+  </svg>
+);
+
 export default function Home() {
   const [installed, setInstalled] = useState(false);
 
@@ -57,7 +79,10 @@ export default function Home() {
 
     // Keep installs realistically below downloads (but allow growth from 0)
     const bufferedMaxInstalls = newDownloads;
-    const newInstalls = Math.min(installsCount + installsAdd, bufferedMaxInstalls);
+    const newInstalls = Math.min(
+      installsCount + installsAdd,
+      bufferedMaxInstalls
+    );
 
     setDownloadsCount(newDownloads);
     setInstallsCount(newInstalls);
@@ -113,18 +138,6 @@ export default function Home() {
     window.location.href = mailto;
   };
 
-  const GitHubIcon = ({ className = "" }) => (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className={className} fill="currentColor">
-      <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.39 6.84 9.75.5.1.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.38-3.37-1.38-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.08 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.33.1-2.77 0 0 .84-.28 2.75 1.05.8-.23 1.65-.34 2.5-.34.85 0 1.7.12 2.5.34 1.9-1.33 2.74-1.05 2.74-1.05.56 1.44.21 2.51.1 2.77.64.72 1.03 1.63 1.03 2.75 0 3.95-2.34 4.82-4.58 5.08.36.32.68.95.68 1.92 0 1.39-.01 2.5-.01 2.84 0 .27.18.59.69.48A10.05 10.05 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" />
-    </svg>
-  );
-
-  const LinkedInIcon = ({ className = "" }) => (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className={className} fill="currentColor">
-      <path d="M20.45 20.45H17v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85v5.5H9.66V9h3.32v1.56h.05c.46-.87 1.6-1.8 3.29-1.8 3.52 0 4.17 2.32 4.17 5.34v6.35ZM5.34 7.43a1.93 1.93 0 1 1 0-3.86 1.93 1.93 0 0 1 0 3.86ZM6.98 20.45H3.7V9h3.28v11.45ZM22 2H2v20h20V2Z" />
-    </svg>
-  );
-
   return (
     <div className="w-screen h-screen overflow-hidden ">
       <AnimatePresence mode="wait">
@@ -135,7 +148,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.25 }}
-            className="w-full h-full overflow-hidden bg-[#FFF6FA]" /* was #18191a */
+            className="w-full h-full overflow-hidden bg-[#FFF6FA]"
           >
             <div className="w-full h-full p-2 sm:p-6 lg:p-8">
               <div className="w-full h-full sm:rounded-3xl shadow-[80px_80px_80px_rgba(0,0,0,0)] sm:p-4">
@@ -173,14 +186,20 @@ export default function Home() {
                               aria-label={meta.name}
                             >
                               {meta.name.split("").map((c, i) => (
-                                <motion.span key={i} variants={char} className="inline-block">
+                                <motion.span
+                                  key={i}
+                                  variants={char}
+                                  className="inline-block"
+                                >
                                   {c === " " ? "\u00A0" : c}
                                 </motion.span>
                               ))}
                             </motion.h1>
 
                             <div className="mt-1 text-[12px] sm:text-sm text-[#8A4A69]">
-                              <span className="text-[#6B2B4A]">{meta.publisher}</span>
+                              <span className="text-[#6B2B4A]">
+                                {meta.publisher}
+                              </span>
                               <span className="mx-2">•</span>
                               <span>v{meta.version}</span>
                               <span className="mx-2">•</span>
@@ -199,7 +218,6 @@ export default function Home() {
                                 {meta.installs} installs
                               </span>
 
-                              {/* Quick Download button (same height) */}
                               <button
                                 type="button"
                                 onClick={onDownload}
@@ -223,17 +241,20 @@ export default function Home() {
                             </span>
                             <br />
                             <br />
-                            I’m interested in full-stack development, systems engineering, hardware, and AI, and I enjoy building technology that solves real problems.
-                            I’m active in student leadership and enjoy connecting with others who are curious and driven.
+                            I’m interested in full-stack development, systems
+                            engineering, hardware, and AI, and I enjoy building
+                            technology that solves real problems. I’m active in
+                            student leadership and enjoy connecting with others
+                            who are curious and driven.
                             <br />
-                            <br></br>
+                            <br />
                             <span className="text-[13px] text-[#8A4A69] font-normal">
                               Click “Download” to learn more about me! ✨
                             </span>
                           </p>
                         </div>
 
-                        {/* FEATURES (✅ updated to interests + emojis) */}
+                        {/* FEATURES */}
                         <div className="rounded-xl border border-[#F3B6D3] bg-[#FFF7FB] p-4 sm:p-6 lg:p-7 xl:p-5 flex flex-col xl:flex-1 xl:min-h-0">
                           <div className="text-[12px] lg:text-[13px] text-[#8A4A69] mb-1">
                             Hobbies & Interests
@@ -291,11 +312,15 @@ export default function Home() {
 
                       {/* RIGHT */}
                       <aside className="min-h-0 flex flex-col gap-3 sm:gap-6">
-                        {/* CONTACT ME form */}
                         <div className="rounded-xl border border-[#F3B6D3] bg-[#FFF7FB] p-4 sm:p-6 xl:p-5 flex flex-col xl:flex-1 xl:min-h-0">
-                          <div className="text-[12px] text-[#8A4A69] mb-3">Contact me</div>
+                          <div className="text-[12px] text-[#8A4A69] mb-3">
+                            Contact me
+                          </div>
 
-                          <form onSubmit={onSubmitContact} className="flex-1 flex flex-col gap-3 min-h-0">
+                          <form
+                            onSubmit={onSubmitContact}
+                            className="flex-1 flex flex-col gap-3 min-h-0"
+                          >
                             <input
                               value={contactName}
                               onChange={(e) => setContactName(e.target.value)}
@@ -321,7 +346,9 @@ export default function Home() {
 
                             <div className="text-[12px] text-[#8A4A69]">
                               Sends via your email app to{" "}
-                              <span className="text-[#6B2B4A]">zehraahmedzaidi@gmail.com</span>
+                              <span className="text-[#6B2B4A]">
+                                zehraahmedzaidi@gmail.com
+                              </span>
                             </div>
 
                             <button
@@ -352,7 +379,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="w-full h-full overflow-hidden bg-[#FFF6FA]" /* was #0F111A */
+            className="w-full h-full overflow-hidden bg-[#FFF6FA]"
           >
             <Container fullPage onBack={() => setInstalled(false)} />
           </motion.div>
