@@ -214,9 +214,6 @@ export default function Home() {
                               <span className="text-[12px] px-2 py-1 rounded-md bg-[#FFF0F7] border border-[#F3B6D3] text-[#6B2B4A]">
                                 {meta.downloads} downloads
                               </span>
-                              <span className="text-[12px] px-2 py-1 rounded-md bg-[#FFF0F7] border border-[#F3B6D3] text-[#6B2B4A]">
-                                {meta.installs} installs
-                              </span>
 
                               <button
                                 type="button"
