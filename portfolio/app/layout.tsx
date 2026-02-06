@@ -7,6 +7,11 @@ const quicksand = Quicksand({
   weight: ["300", "400", "500", "600", "700"],
 });
 
+export const metadata = {
+  title: "Zehra's Portfolio",
+  description: "Zehra's VS Code Inspired Portfolio",
+};
+
 export default function RootLayout({
   children,
 }: {

@@ -223,11 +223,11 @@ function ExtensionsProjectsView({ items }:{items:Project[]}) {
                         href={p.githubUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="w-full md:w-auto inline-flex items-center justify-center gap-2 h-8 px-3 rounded-md border border-[#F3B6D3] bg-[#FFF0F7] hover:bg-[#FFE4F0] text-[12px] text-[#3A0F24]"
+                        className="w-full md:w-auto inline-flex items-center justify-center gap-2 h-8 px-3 rounded-md border border-[#F3B6D3] bg-[#FF4FA3] hover:bg-[#FFE4F0] text-[12px] text-[#3A0F24]"
                         title="Open GitHub"
                       >
-                        <span className="text-[#6B2B4A]">GitHub</span>
-                        <span className="text-[#8A4A69]">↗</span>
+                        <span className="text-white">GitHub</span>
+                        <span className="text-white">↗</span>
                       </a>
                     ) : (
                       <div className="text-[#8A4A69] text-[12px] w-full md:w-auto text-center md:text-right">

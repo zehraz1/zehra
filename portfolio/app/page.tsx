@@ -47,7 +47,7 @@ export default function Home() {
 
   const meta = useMemo(
     () => ({
-      name: "Zehra Portfolio",
+      name: "Zehra's Portfolio",
       publisher: "zehra",
       version: "1.0.0",
       rating: "5.0",
@@ -158,7 +158,7 @@ export default function Home() {
                               variants={container}
                               initial="hidden"
                               animate="show"
-                              className="font-semibold text-xl sm:text-3xl text-[#3A0F24] leading-tight"
+                              className="font-semibold text-lg sm:text-3xl text-[#3A0F24] leading-tight"
                               aria-label={meta.name}
                             >
                               {meta.name.split("").map((c, i) => (
@@ -214,11 +214,7 @@ export default function Home() {
                             </span>
                             <br />
                             <br />
-                            I’m interested in full-stack development, systems
-                            engineering, hardware, and AI, and I enjoy building
-                            technology that solves real problems. I’m active in
-                            student leadership and enjoy connecting with others
-                            who are curious and driven.
+                            I’m passionate about full-stack development, embedded systems, and AI, and I enjoy building practical technology that solves real problems. I’m also active in student leadership and love connecting with people who are curious, driven, and eager to learn.
                             <br />
                             <br />
                             <span className="text-[13px] text-[#8A4A69] font-normal">
